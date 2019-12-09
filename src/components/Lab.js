@@ -2,14 +2,16 @@ import React from 'react';
 import { Accordion, Table, Label } from 'semantic-ui-react';
 import LabData from './LabData';
 
-export default function Lab() {
-  const panels = createPanels(LabData);
+export default class Lab extends React.PureComponent {
+  render() {
+    const panels = createPanels(LabData);
 
-  return (
-    <React.Fragment>
-      <Accordion panels={panels} defaultActiveIndex={0} />
-    </React.Fragment>
-  )
+    return (
+      <React.Fragment>
+        <Accordion panels={panels} defaultActiveIndex={0} />
+      </React.Fragment>
+    )
+  }
 }
 
 function createPanels(characters) {

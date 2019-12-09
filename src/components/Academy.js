@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Image, Reveal, Message, Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 
-export default class Academy extends React.Component {
+export default class Academy extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,9 +66,10 @@ export default class Academy extends React.Component {
             academyData &&
             academyData.map(function (character) {
               const key = parseCharName(character.charName);
-              let tutors = `@${character.tutors.shift().discordName}`;
-              character.tutors.forEach(tutor => {
-                tutors = tutors.concat(`, @${tutor.discordName}`);
+              let tutors = "";
+              character.tutors.forEach((tutor, i) => {
+                if (i === 0) tutors = `@${tutor.discordName}`
+                else tutors += `, @${tutor.discordName}`;
               });
               
               return (

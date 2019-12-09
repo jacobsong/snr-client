@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment, Divider, Header, Card, Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 
-export default class Staff extends React.Component {
+export default class Staff extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
