@@ -66,9 +66,9 @@ export default class Academy extends React.Component {
             academyData &&
             academyData.map(function (character) {
               const key = parseCharName(character.charName);
-              let tutors = `@${character.tutors.shift()}`;
+              let tutors = `@${character.tutors.shift().discordName}`;
               character.tutors.forEach(tutor => {
-                tutors = tutors.concat(`, @${tutor}`);
+                tutors = tutors.concat(`, @${tutor.discordName}`);
               });
               
               return (
