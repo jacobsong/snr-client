@@ -2,8 +2,33 @@ import React from 'react';
 import { Grid, Image, List, Icon } from 'semantic-ui-react';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 import WidgetBot from '@widgetbot/react-embed';
+import axios from 'axios';
 
 export default class Home extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      memberCount: 6200
+    }
+  }
+
+  async componentDidMount() {
+    let memberCount;
+    try {
+      memberCount = await axios.get("/api/membercount");
+    } catch (e) {
+      console.log(`Axios request failed: ${e}`);
+    }
+
+    this.setState({
+      ...this.state, 
+        isLoading: false,
+        memberCount: memberCount.data
+      
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -23,7 +48,7 @@ export default class Home extends React.PureComponent {
                 What SnR offers:
                 <List>
                   <List.Item icon='minus' content='The largest and most diverse Smash community on all of discord!' />
-                  <List.Item icon='minus' content='5500+ members' />
+                  <List.Item icon='minus' content={`${this.state.memberCount} members`} />
                   <List.Item icon='minus' content='A fun friendly community welcoming all people!' />
                   <List.Item icon='minus' content='Pro Players are here as well!' />
                   <List.Item icon='minus' content='Tutors for Smash Ultimate and schoolwork!' />
